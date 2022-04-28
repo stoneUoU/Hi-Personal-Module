@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '9.0'
+
+target 'Hi-Personal-Module_Example' do
+  pod 'Hi-Personal-Module', :path => '../'
+
+  target 'Hi-Personal-Module_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
