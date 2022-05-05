@@ -1,0 +1,16 @@
+PODS:
+  - Hi-Personal-Module (0.1.0)
+
+DEPENDENCIES:
+  - Hi-Personal-Module (from `../`)
+
+EXTERNAL SOURCES:
+  Hi-Personal-Module:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Hi-Personal-Module: 917dc308a16ce35b8c5ac246717c40842d36ce86
+
+PODFILE CHECKSUM: a42c2bb0c8810af18221f3dccf0fec9de459d40b
+
+COCOAPODS: 1.10.0

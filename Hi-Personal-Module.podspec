@@ -32,6 +32,11 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'Hi-Personal-Module/Classes/**/*'
   
+  s.dependency 'Hi-Router-Module'
+  s.dependency 'Hi-Kit-Module'
+  
+  s.dependency 'SnapKit'
+  
   # s.resource_bundles = {
   #   'Hi-Personal-Module' => ['Hi-Personal-Module/Assets/*.png']
   # }

@@ -1,0 +1,6 @@
+framework module Hi_Personal_Module {
+  umbrella header "Hi-Personal-Module-umbrella.h"
+
+  export *
+  module * { export * }
+}
