@@ -52,7 +52,7 @@ extension HiPersonalView {
     func setMas() {
         self.excuteButton.snp.makeConstraints { make in
             make.center.equalTo(self);
-            make.size.equalTo(CGSize.init(width: SCREENWIDTH - 32, height: 44));
+            make.size.equalTo(CGSize.init(width: HiSCREENWIDTH - 32, height: 44));
         }
     }
 }
@@ -60,7 +60,7 @@ extension HiPersonalView {
 //MARK: IB-Action
 extension HiPersonalView {
     @objc func toExcute(_ sender: UIButton) {
-        print(sender.titleLabel?.text);
+        self.personalViewDelegate?.toOperate(view: self);
     }
 }
     

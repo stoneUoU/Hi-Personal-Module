@@ -22,7 +22,7 @@ class HiPersonalViewController:UIViewController {
     // 当加载视图结束时调用该方法
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .green;
+        self.view.backgroundColor = .white;
         self.setUI();
     }
         
@@ -70,7 +70,6 @@ class HiPersonalViewController:UIViewController {
     lazy var personalView: HiPersonalView = {[weak self] in
       let personalView = HiPersonalView(frame:.zero)
         personalView.personalViewDelegate = self
-        personalView.backgroundColor = .red;
         personalView.handle = { [weak self]  in
       }
       return personalView
@@ -90,6 +89,7 @@ extension HiPersonalViewController {
 extension HiPersonalViewController:HiPersonalViewDelegate {
     
     func toOperate(view: HiPersonalView) {
-        
+        let oc = OCFileClass();
+        oc.ocFile.toFile();
     }
 }

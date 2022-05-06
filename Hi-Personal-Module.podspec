@@ -30,7 +30,8 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '9.0'
 
-  s.source_files = 'Hi-Personal-Module/Classes/**/*'
+  s.source_files = 'Hi-Personal-Module/Classes/**/*.{h,m,swift}'
+  s.resources = ['Hi-Personal-Module/**/*.xcassets']
   
   s.dependency 'Hi-Router-Module'
   s.dependency 'Hi-Kit-Module'

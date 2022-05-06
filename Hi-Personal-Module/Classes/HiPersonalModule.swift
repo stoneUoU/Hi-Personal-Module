@@ -20,3 +20,9 @@ public class HiPersonalModule: HiRouterModuleProtocol {
         HiPersonalModule().registerPages()
     }
 }
+
+
+/// 对自创建的 OC 类的使用
+open class OCFileClass: NSObject {
+    public var ocFile = OCFile()
+}
