@@ -6,6 +6,10 @@
 //
 
 import UIKit
+import SwiftyJSON
+import HandyJSON
+import Hi_Network_Module
+import Hi_Helper_Module
 
 class HiPersonalViewController:UIViewController {
     
@@ -89,7 +93,117 @@ extension HiPersonalViewController {
 extension HiPersonalViewController:HiPersonalViewDelegate {
     
     func toOperate(view: HiPersonalView) {
-        let oc = OCFileClass();
-        oc.ocFile.toFile();
+//        let oc = OCFileClass();
+//        oc.ocFile.toFile();
+//        self.fetchDatas { boolean in
+//            if (boolean) {
+//
+//            }
+//        };
+        self.fetchTaoke();
+    }
+    
+//    func fetchDatas(callback:@escaping (_ isBoolean:Bool)->()) {
+//        var params = Dictionary<String,Any>();
+//        params["type_id"] = 2;
+//        params["order"] = "all";
+//        HiAPI.request(accessToken: "", .fetchHomeData(params), success: { json in
+//
+//            let data:[String : Any] = JSON(json)["data"].rawValue as! [String : Any];
+//            if let hiModel:HiModel = HiModel.deserialize(from: data) {
+//                print(JSON(hiModel.toJSON()))
+//            }
+//
+//            callback(true);
+//        }, error: { statusCode in
+//            callback(true);
+//        }, failure: { error in
+//            callback(true);
+//        })
+//    }
+    
+//    func fetchDatas(callback:@escaping (_ isBoolean:Bool)->()) {
+//        HiAPI.request(accessToken: "", .fetchNavigationData(()), success: { json in
+//
+//            let data:[Any] = JSON(json).rawValue as! [Any];
+//            if let hiNavigationModels = [HiNavigationModel].deserialize(from: data) {
+//                hiNavigationModels.forEach({ (hiNavigationModel) in
+//                    print(JSON(hiNavigationModel?.toJSON()));
+//                })
+//            }
+//            callback(true);
+//
+//        }, error: { statusCode in
+//            callback(true);
+//        }, failure: { error in
+//            callback(true);
+//        })
+//    }
+    
+    func fetchDatas(callback:@escaping (_ isBoolean:Bool)->()) {
+        HiAPI.request(accessToken: "", .fetchBaseInfo(()), success: { json in
+            if JSON(json)["code"] == 1 {
+//                正确的方式：
+//                let data:[String : Any] = JSON(json)["data"].rawValue as! [String : Any];
+                if let hiExampleModel:HiExampleModel = HiExampleModel.deserialize(from: "\(JSON(json)["data"])") {
+                    print("\(JSON(hiExampleModel.toJSON()))")
+                }
+            }
+            callback(true);
+        }, error: { statusCode in
+            callback(true);
+        }, failure: { error in
+            callback(true);
+        })
+    }
+    
+    func mergeRequest(_ id: String, page:Int = 1, order:String, _ success: @escaping ()->(), _ failure: @escaping (Error?)->()) {
+        let group = DispatchGroup()
+        let queue = DispatchQueue.global()
+        queue.async(group: group, execute: {
+            group.enter()
+            self.fireRankingModels(id, order: order) {
+                group.leave()
+            } _: { (_: Error?) in
+                group.leave()
+            }
+        })
+        queue.async(group: group, execute: {
+            group.enter()
+            self.fireHomeModels(id, page: page) {
+                group.leave()
+            } _: { (_: Error?) in
+                group.leave()
+            }
+        })
+        group.notify(queue: queue) {
+            DispatchQueue.main.async {
+                success();
+            }
+        }
+    }
+    //请求主页主要数据
+    func fireHomeModels(_ id: String, page:Int = 1,_ success: @escaping ()->(), _ failure: @escaping (Error?)->()) {
+    }
+    //请求排行版信息：
+    func fireRankingModels(_ type_id: String, order:String,_ success: @escaping ()->(), _ failure: @escaping (Error?)->()) {
+        
+    }
+}
+
+
+extension HiPersonalViewController {
+    
+    func fetchTaoke() {
+        DispatchQueue.global().async {
+            HiTaokeHelper.fetchData(pageId: 1, pageSize: 9, kindCount: 1) { [weak self] taokeModels in
+                DispatchQueue.main.async {
+                    taokeModels.forEach({ (taokeModel) in
+                        print(JSON(taokeModel.toJSON()));
+                    })
+                }
+            } _: { (_: Error?) in
+            }
+        }
     }
 }

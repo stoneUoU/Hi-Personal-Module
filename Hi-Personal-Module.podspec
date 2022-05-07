@@ -33,10 +33,14 @@ TODO: Add long description of the pod here.
   s.source_files = 'Hi-Personal-Module/Classes/**/*.{h,m,swift}'
   s.resources = ['Hi-Personal-Module/**/*.xcassets']
   
+  s.dependency 'Hi-Network-Module'
+  s.dependency 'Hi-Helper-Module'
   s.dependency 'Hi-Router-Module'
   s.dependency 'Hi-Kit-Module'
   
   s.dependency 'SnapKit'
+  s.dependency 'HandyJSON'
+  s.dependency 'Alamofire'
   
   # s.resource_bundles = {
   #   'Hi-Personal-Module' => ['Hi-Personal-Module/Assets/*.png']

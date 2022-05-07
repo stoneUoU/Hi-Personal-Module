@@ -5,7 +5,6 @@
 //  Created by stone on 2022/4/29.
 //
 
-import Foundation
 import Hi_Router_Module
 
 //MARK: - 模块A
@@ -26,3 +25,4 @@ public class HiPersonalModule: HiRouterModuleProtocol {
 open class OCFileClass: NSObject {
     public var ocFile = OCFile()
 }
+
