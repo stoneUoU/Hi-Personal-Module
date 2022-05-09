@@ -101,8 +101,8 @@ extension HiPersonalViewController:HiPersonalViewDelegate {
 //            }
 //        };
 //        self.fetchTaoke();
-//        self.fetchJson();
-        self.fetchLog();
+        self.fetchJson();
+//        self.fetchLog();
         
     }
     
@@ -210,15 +210,20 @@ extension HiPersonalViewController {
 //        }
 //    }
     
-//    func fetchJson() {
+    func fetchJson() {
 //        let dict:Dictionary<AnyHashable,Any> = HiJsonLoadHelper.fetchJson(named: "HiMask", moduled: "Hi_Personal_Module");
 //        print(HiJsonStrHelper.convertDictToJsonStr(dict: dict));
-//    }
-    
-    func fetchLog() {
-        HiLocalData.saveStore("年度费用明细查询");
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            print("store_____\(HiLocalData.getStore())");
+        
+        let dict:Dictionary<String,Any> = HiJsonLoadHelper.fetchJson(named: "HiMask", moduled: "Hi_Personal_Module") as Dictionary<String, Any>;
+        if let hiCareModel:HiCareModel = HiCareModel.deserialize(from: dict) {
+            print(JSON(hiCareModel.toJSON()))
         }
     }
+    
+//    func fetchLog() {
+//        HiLocalData.saveStore("年度费用明细查询");
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//            print("store_____\(HiLocalData.getStore())");
+//        }
+//    }
 }
