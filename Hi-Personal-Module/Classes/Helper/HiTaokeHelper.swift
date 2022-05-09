@@ -37,7 +37,7 @@ class HiTaokeHelper {
             switch response.result{
             case .success(let json):
                 for i in 0..<Int(JSON(json)["data"]["list"].count) {
-                    let dataList:Dictionary = HiJsonStrHelper.convertDictJsonStr(jsonStr: "\(JSON(json)["data"]["list"][i])") as! [String : Any];
+                    let dataList:Dictionary = HiJsonStrHelper.convertJsonStrToDict(jsonStr: "\(JSON(json)["data"]["list"][i])") as! [String : Any];
                     let taokeSonModel:HiTaokeSonModel = HiTaokeSonModel();
                     taokeSonModel.dtitle = dataList["dtitle"] as! String;
                     taokeSonModel.goodsId = dataList["goodsId"] as! String;

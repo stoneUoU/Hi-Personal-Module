@@ -31,21 +31,20 @@ TODO: Add long description of the pod here.
   s.ios.deployment_target = '9.0'
 
   s.source_files = 'Hi-Personal-Module/Classes/**/*.{h,m,swift}'
-  s.resources = ['Hi-Personal-Module/**/*.xcassets']
+  s.resource_bundles = {
+    'Hi-Personal-Module' => ['Hi-Personal-Module/Resource/*.{storyboard,xib,xcassets,json}']
+  }
   
   s.dependency 'Hi-Network-Module'
   s.dependency 'Hi-Helper-Module'
-  s.dependency 'Hi-Router-Module'
+  s.dependency 'Hi-Router-Module', '0.2.0'
   s.dependency 'Hi-Kit-Module'
   
   s.dependency 'SnapKit'
+  s.dependency 'Masonry'
   s.dependency 'HandyJSON'
   s.dependency 'Alamofire'
   
-  # s.resource_bundles = {
-  #   'Hi-Personal-Module' => ['Hi-Personal-Module/Assets/*.png']
-  # }
-
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'

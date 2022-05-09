@@ -100,7 +100,10 @@ extension HiPersonalViewController:HiPersonalViewDelegate {
 //
 //            }
 //        };
-        self.fetchTaoke();
+//        self.fetchTaoke();
+//        self.fetchJson();
+        self.fetchLog();
+        
     }
     
 //    func fetchDatas(callback:@escaping (_ isBoolean:Bool)->()) {
@@ -194,16 +197,28 @@ extension HiPersonalViewController:HiPersonalViewDelegate {
 
 extension HiPersonalViewController {
     
-    func fetchTaoke() {
-        DispatchQueue.global().async {
-            HiTaokeHelper.fetchData(pageId: 1, pageSize: 9, kindCount: 1) { [weak self] taokeModels in
-                DispatchQueue.main.async {
-                    taokeModels.forEach({ (taokeModel) in
-                        print(JSON(taokeModel.toJSON()));
-                    })
-                }
-            } _: { (_: Error?) in
-            }
+//    func fetchTaoke() {
+//        DispatchQueue.global().async {
+//            HiTaokeHelper.fetchData(pageId: 1, pageSize: 9, kindCount: 1) { [weak self] taokeModels in
+//                DispatchQueue.main.async {
+//                    taokeModels.forEach({ (taokeModel) in
+//                        print(JSON(taokeModel.toJSON()));
+//                    })
+//                }
+//            } _: { (_: Error?) in
+//            }
+//        }
+//    }
+    
+//    func fetchJson() {
+//        let dict:Dictionary<AnyHashable,Any> = HiJsonLoadHelper.fetchJson(named: "HiMask", moduled: "Hi_Personal_Module");
+//        print(HiJsonStrHelper.convertDictToJsonStr(dict: dict));
+//    }
+    
+    func fetchLog() {
+        HiLocalData.saveStore("年度费用明细查询");
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            print("store_____\(HiLocalData.getStore())");
         }
     }
 }

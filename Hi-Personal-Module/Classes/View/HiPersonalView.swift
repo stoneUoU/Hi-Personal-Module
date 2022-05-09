@@ -7,6 +7,8 @@
 
 import UIKit
 import SnapKit
+import Masonry
+import Hi_Kit_Module
 import Hi_Router_Module
 
 typealias HiHandle = () -> Void
@@ -31,10 +33,10 @@ class HiPersonalView: UIView {
     @objc lazy var excuteButton: UIButton = {
         let excuteButton = UIButton.init(type: UIButton.ButtonType.custom)
         excuteButton.setTitle("Hi-Personal-Module", for: UIControl.State.normal)
-        excuteButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        excuteButton.setTitleColor(.black, for: .normal)
+        excuteButton.titleLabel?.font = HiFont.medium(size: 16.0)
+        excuteButton.setTitleColor(HiColorBlueView, for: .normal)
         excuteButton.layer.borderWidth = 0.5;
-        excuteButton.layer.borderColor = UIColor.lightGray.cgColor;
+        excuteButton.layer.borderColor = HiColorBlueView.cgColor;
         excuteButton.layer.cornerRadius = 22;
         excuteButton.layer.masksToBounds = true;
         excuteButton.addTarget(self, action: #selector(toExcute(_:)), for: .touchUpInside)
@@ -50,9 +52,13 @@ extension HiPersonalView {
         self.setMas()
     }
     func setMas() {
-        self.excuteButton.snp.makeConstraints { make in
-            make.center.equalTo(self);
-            make.size.equalTo(CGSize.init(width: HiSCREENWIDTH - 32, height: 44));
+//        self.excuteButton.snp.makeConstraints { make in
+//            make.center.equalTo(self);
+//            make.size.equalTo(CGSize.init(width: HiSCREENWIDTH - 32, height: 44));
+//        }
+        self.excuteButton.mas_makeConstraints { make in
+            make?.center.equalTo()(self);
+            make?.size.mas_equalTo()(CGSize.init(width: HiSCREENWIDTH - 32, height: 44))
         }
     }
 }
