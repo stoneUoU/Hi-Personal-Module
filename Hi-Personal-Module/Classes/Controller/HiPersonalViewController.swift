@@ -111,6 +111,26 @@ extension HiPersonalViewController:HiPersonalViewDelegate {
         params["contractVersionQueryDTO"] = ["contractType":4];
         params["noticeTypeParamDTO"] = [:];
         HiAPI.request(.fetchUnitCfg(params), success: { json in
+//            HandyJSON
+            let dataHandyJSON:[String : Any] = JSON(json)["data"].rawValue as! [String : Any];
+            if let handyJSON:HiUnitCfgHandyJSON = HiUnitCfgHandyJSON.deserialize(from: dataHandyJSON) {
+                let dataHandyJSONs:[HiUnitCfgHandyJSONTopListList] = handyJSON.topList?.list ?? [];
+                let dataHandyJSON:HiUnitCfgHandyJSONTopListList = dataHandyJSONs[0];
+                print(JSON(dataHandyJSON.toJSON()));
+            }
+            
+//            SwiftyJSON
+            let swiftyJSON:HiUnitCfgSwiftyJSON = HiUnitCfgSwiftyJSON.init(json: JSON(json)["data"]);
+            let dataSwiftyJSONs:[HiUnitCfgSwiftyJSONTopListList] = swiftyJSON.topList.list;
+            let dataSwiftyJSON:HiUnitCfgSwiftyJSONTopListList = dataSwiftyJSONs[0];
+            print(dataSwiftyJSON.title);
+            
+            let dataYYmodel:[String : Any] = JSON(json)["data"].rawValue as! [String : Any];
+            let yyModel:HiUnitCfgYYModel = HiUnitCfgYYModel.yy_model(with: dataYYmodel) ?? HiUnitCfgYYModel();
+            let dataYYModels:[HiUnitCfgYYModelTopListList] = yyModel.topList?.list ?? [];
+            let dataYYModel:HiUnitCfgYYModelTopListList = dataYYModels[0];
+            print(dataYYModel.yy_modelToJSONString());
+            
             callback(true);
         }, error: { statusCode in
             callback(true);
@@ -127,7 +147,7 @@ extension HiPersonalViewController:HiPersonalViewDelegate {
 //
 //            let data:[String : Any] = JSON(json)["data"].rawValue as! [String : Any];
 //            if let hiModel:HiModel = HiModel.deserialize(from: data) {
-////                print(JSON(hiModel.toJSON()))
+//                print(JSON(hiModel.toJSON()))
 //            }
 //
 //            callback(true);
