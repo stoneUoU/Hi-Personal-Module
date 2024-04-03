@@ -45,6 +45,8 @@ TODO: Add long description of the pod here.
   s.dependency 'HandyJSON'
   s.dependency 'Alamofire'
   s.dependency "YYModel"
+  s.dependency "KakaJSON"
+  s.dependency "ObjectMapper"
   
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'

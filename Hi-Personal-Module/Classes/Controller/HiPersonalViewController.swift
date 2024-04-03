@@ -103,7 +103,6 @@ extension HiPersonalViewController:HiPersonalViewDelegate {
 //        self.fetchTaoke();
 //        self.fetchJson();
 //        self.fetchLog();
-        
     }
     
     func fetchDatas(callback:@escaping (_ isBoolean:Bool)->()) {
@@ -116,20 +115,32 @@ extension HiPersonalViewController:HiPersonalViewDelegate {
             if let handyJSON:HiUnitCfgHandyJSON = HiUnitCfgHandyJSON.deserialize(from: dataHandyJSON) {
                 let dataHandyJSONs:[HiUnitCfgHandyJSONTopListList] = handyJSON.topList?.list ?? [];
                 let dataHandyJSON:HiUnitCfgHandyJSONTopListList = dataHandyJSONs[0];
-                print(JSON(dataHandyJSON.toJSON()));
+//                print(JSON(dataHandyJSON.toJSON()));
             }
             
 //            SwiftyJSON
             let swiftyJSON:HiUnitCfgSwiftyJSON = HiUnitCfgSwiftyJSON.init(json: JSON(json)["data"]);
             let dataSwiftyJSONs:[HiUnitCfgSwiftyJSONTopListList] = swiftyJSON.topList.list;
             let dataSwiftyJSON:HiUnitCfgSwiftyJSONTopListList = dataSwiftyJSONs[0];
-            print(dataSwiftyJSON.title);
+//            print(JSON(json)["data"]["appVersion"]);
             
-            let dataYYmodel:[String : Any] = JSON(json)["data"].rawValue as! [String : Any];
-            let yyModel:HiUnitCfgYYModel = HiUnitCfgYYModel.yy_model(with: dataYYmodel) ?? HiUnitCfgYYModel();
+            let yyModel:HiUnitCfgYYModel = HiUnitCfgYYModel.yy_model(with: JSON(json)["data"].rawValue as! [AnyHashable : Any])!;
             let dataYYModels:[HiUnitCfgYYModelTopListList] = yyModel.topList?.list ?? [];
             let dataYYModel:HiUnitCfgYYModelTopListList = dataYYModels[0];
-            print(dataYYModel.yy_modelToJSONString());
+//            print(yyModel.yy_modelToJSONString()!);
+            
+            let putJson:[String : Any] = JSON(json)["data"].rawValue as! [String : Any];
+            let kakaModel:HiUnitCfgKakaJSONModel = putJson.kj.model(HiUnitCfgKakaJSONModel.self)
+            let dataKakaModels:[HiUnitCfgKakaJSONModelTopListList] = kakaModel.topList?.list ?? [];
+            let dataKakaModel:HiUnitCfgKakaJSONModelTopListList = dataKakaModels[0];
+//            print(kakaModel.kj.JSONString());
+            
+//            let putJson:[String : Any] = JSON(json)["data"].rawValue as! [String : Any];
+            let objectMapperModel:HiUnitCfgObjectMapperModel = HiUnitCfgObjectMapperModel(JSON: putJson)!;
+            let dataObjectMapperModels:[HiUnitCfgObjectMapperModelTopListList] = objectMapperModel.topList?.list ?? [];
+            let dataObjectMapperModel:HiUnitCfgObjectMapperModelTopListList = dataObjectMapperModels[0];
+            print(dataObjectMapperModel.toJSONString(prettyPrint: true)!);
+            
             
             callback(true);
         }, error: { statusCode in

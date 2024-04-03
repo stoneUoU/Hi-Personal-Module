@@ -9,13 +9,12 @@
 import Foundation
 import SwiftyJSON
 
-class HiUnitCfgSwiftyJSON {
+class HiUnitCfgSwiftyJSON:NSObject {
 	var appVersion: HiUnitCfgSwiftyJSONAppVersion
 	var homeWindowNotice: HiUnitCfgSwiftyJSONHomeWindowNotice
 	var newCntrVer: HiUnitCfgSwiftyJSONNewCntrVer
 	var topList: HiUnitCfgSwiftyJSONTopList
-
-	init(json: JSON) {
+    required init(json: JSON) {
 		appVersion = HiUnitCfgSwiftyJSONAppVersion(json: json["appVersion"])
 		homeWindowNotice = HiUnitCfgSwiftyJSONHomeWindowNotice(json: json["homeWindowNotice"])
 		newCntrVer = HiUnitCfgSwiftyJSONNewCntrVer(json: json["newCntrVer"])
@@ -23,7 +22,7 @@ class HiUnitCfgSwiftyJSON {
 	}
 }
 
-class HiUnitCfgSwiftyJSONAppVersion {
+class HiUnitCfgSwiftyJSONAppVersion:NSObject {
 	var content: String
 	var newVersion: String
 	var newVersionSize: String
@@ -45,7 +44,7 @@ class HiUnitCfgSwiftyJSONAppVersion {
 	}
 }
 
-class HiUnitCfgSwiftyJSONHomeWindowNotice {
+class HiUnitCfgSwiftyJSONHomeWindowNotice:NSObject {
 	var annoWay: String
 	var clikCont: String
 	var clikStas: String
@@ -77,7 +76,7 @@ class HiUnitCfgSwiftyJSONHomeWindowNotice {
 	}
 }
 
-class HiUnitCfgSwiftyJSONTopList {
+class HiUnitCfgSwiftyJSONTopList:NSObject {
 	var list = [HiUnitCfgSwiftyJSONTopListList]()
 
 	init(json: JSON) {
@@ -85,7 +84,7 @@ class HiUnitCfgSwiftyJSONTopList {
 	}
 }
 
-class HiUnitCfgSwiftyJSONTopListList {
+class HiUnitCfgSwiftyJSONTopListList:NSObject {
 	var bizCode: String
 	var newsId: String
 	var newsPkId: Int = 0
@@ -117,7 +116,7 @@ class HiUnitCfgSwiftyJSONTopListList {
 	}
 }
 
-class HiUnitCfgSwiftyJSONNewCntrVer {
+class HiUnitCfgSwiftyJSONNewCntrVer:NSObject {
 	var content: String
 	var contractType: String
 	var createTime: String
