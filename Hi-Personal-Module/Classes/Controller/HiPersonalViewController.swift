@@ -115,32 +115,30 @@ extension HiPersonalViewController:HiPersonalViewDelegate {
             if let handyJSON:HiUnitCfgHandyJSON = HiUnitCfgHandyJSON.deserialize(from: dataHandyJSON) {
                 let dataHandyJSONs:[HiUnitCfgHandyJSONTopListList] = handyJSON.topList?.list ?? [];
                 let dataHandyJSON:HiUnitCfgHandyJSONTopListList = dataHandyJSONs[0];
-//                print(JSON(dataHandyJSON.toJSON()));
+                print("HandyJSON______\(JSON(dataHandyJSON.toJSON()))");
             }
             
 //            SwiftyJSON
             let swiftyJSON:HiUnitCfgSwiftyJSON = HiUnitCfgSwiftyJSON.init(json: JSON(json)["data"]);
             let dataSwiftyJSONs:[HiUnitCfgSwiftyJSONTopListList] = swiftyJSON.topList.list;
             let dataSwiftyJSON:HiUnitCfgSwiftyJSONTopListList = dataSwiftyJSONs[0];
-//            print(JSON(json)["data"]["appVersion"]);
+            print("SwiftyJSON______\(JSON(json)["data"]["appVersion"])");
             
             let yyModel:HiUnitCfgYYModel = HiUnitCfgYYModel.yy_model(with: JSON(json)["data"].rawValue as! [AnyHashable : Any])!;
             let dataYYModels:[HiUnitCfgYYModelTopListList] = yyModel.topList?.list ?? [];
             let dataYYModel:HiUnitCfgYYModelTopListList = dataYYModels[0];
-//            print(yyModel.yy_modelToJSONString()!);
+            print("YYModel______\(yyModel.yy_modelToJSONString()!)");
             
             let putJson:[String : Any] = JSON(json)["data"].rawValue as! [String : Any];
             let kakaModel:HiUnitCfgKakaJSONModel = putJson.kj.model(HiUnitCfgKakaJSONModel.self)
             let dataKakaModels:[HiUnitCfgKakaJSONModelTopListList] = kakaModel.topList?.list ?? [];
             let dataKakaModel:HiUnitCfgKakaJSONModelTopListList = dataKakaModels[0];
-//            print(kakaModel.kj.JSONString());
+            print("KAKAModel______\(kakaModel.kj.JSONString())");
             
-//            let putJson:[String : Any] = JSON(json)["data"].rawValue as! [String : Any];
             let objectMapperModel:HiUnitCfgObjectMapperModel = HiUnitCfgObjectMapperModel(JSON: putJson)!;
             let dataObjectMapperModels:[HiUnitCfgObjectMapperModelTopListList] = objectMapperModel.topList?.list ?? [];
             let dataObjectMapperModel:HiUnitCfgObjectMapperModelTopListList = dataObjectMapperModels[0];
-            print(dataObjectMapperModel.toJSONString(prettyPrint: true)!);
-            
+            print("ObjectMapper______\(dataObjectMapperModel.toJSONString(prettyPrint: true)!)");
             
             callback(true);
         }, error: { statusCode in
